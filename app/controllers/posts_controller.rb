@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy toggle_status ]
+  access all: [ :show, :index ], user: { except: [ :destroy, :new, :create, :update, :edit  ] }, site_admin: :all
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.order(:title).page(params[:page]).per(5)
   end
 
   # GET /posts/1 or /posts/1.json
@@ -49,7 +50,11 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy!
+    debugger
+    # @post.comments.destroy_all
+    @post.comments.update_all(post_id: nil)
+    @post.destroy
+
 
     respond_to do |format|
       format.html { redirect_to posts_path, status: :see_other, notice: "Post was successfully destroyed." }

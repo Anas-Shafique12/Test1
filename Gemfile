@@ -54,4 +54,5 @@ group :development do
   gem "friendly_id", "~> 5.5.0"
   gem "devise", "~> 4.9", ">= 4.9.4"
   gem "petergate", "~> 3.0"
+  gem "kaminari", "~> 1.2", ">= 1.2.2"
 end

@@ -53,6 +53,13 @@ group :development do
   gem "error_highlight", ">= 0.4.0", platforms: [ :ruby ]
   gem "friendly_id", "~> 5.5.0"
   gem "devise", "~> 4.9", ">= 4.9.4"
-  gem "petergate", "~> 3.0"
+
   gem "kaminari", "~> 1.2", ">= 1.2.2"
+  gem "miss_hannigan"
+  gem "swagger-docs", "~> 0.2.9"
+  gem "cancancan", "~> 3.6", ">= 3.6.1"
+  gem "graphql", "~> 2.4"
+
+gem "rack-cors", require: "rack/cors"
 end
+gem "graphiql-rails", group: :development

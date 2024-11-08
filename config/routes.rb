@@ -17,6 +17,23 @@ Rails.application.routes.draw do
 
   get "comments", to: "comments#info"
 
+  get "comments/show", to: "comments#show"
+  resources :user
+
+  get "users", to: "users#index"
+
+  resources :teachers do
+    resources :courses
+  end
+
+  resources :students do
+    resources :enrollments
+  end
+
+  resources :courses do
+    resources :feedbacks
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -29,4 +46,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  #
 end

@@ -1,0 +1,11 @@
+<%# app/views/courses/_course.html.erb %>
+
+<p>
+  <strong>Course Name:</strong>
+  <%= course.name %>
+</p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= course.teacher.name if course.teacher %>
+</p>

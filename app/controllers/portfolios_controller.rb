@@ -4,7 +4,6 @@ class PortfoliosController < ApplicationController
         @portfolio_items = Portfolio.all
         @portfolio_items = Portfolio.filter_on_title(params[:title]) if params[:title].present?
         @portfolio_items = Portfolio.filter_on_subtitle(params[:subtitle]) if params[:subtitle].present?
-        @portfolio_items = @portfolio_items.presence || []
   end
 
   # def filter
@@ -19,7 +18,7 @@ class PortfoliosController < ApplicationController
   end
 
   def create
-    @portfolio_item = Portfolio.new(params.require(:portfolio).permit(:title, :subtitle, :body))
+    @portfolio_item = Portfolio.new(portfolios_params)
 
     respond_to do |format|
       if @portfolio_item.save
@@ -37,7 +36,7 @@ class PortfoliosController < ApplicationController
   def update
     @portfolio_item = Portfolio.find(params[:id])
     respond_to do |format|
-      if @portfolio_item.update(params.require(:portfolio).permit(:title, :subtitle, :body))
+      if @portfolio_item.update(portfolios_params)
         format.html { redirect_to portfolios_path, notice: "Portfolio was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,5 +55,9 @@ class PortfoliosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to portfolios_url, notice: "Record was removed." }
     end
+  end
+
+  def portfolios_params
+    params.require(:portfolio).permit(:title, :subtitle, :body)
   end
 end

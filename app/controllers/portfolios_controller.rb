@@ -4,7 +4,6 @@ class PortfoliosController < ApplicationController
         @portfolio_items = Portfolio.all
         @portfolio_items = Portfolio.filter_on_title(params[:title]) if params[:title].present?
         @portfolio_items = Portfolio.filter_on_subtitle(params[:subtitle]) if params[:subtitle].present?
-        @portfolio_items = @portfolio_items.presence || []
   end
 
   # def filter

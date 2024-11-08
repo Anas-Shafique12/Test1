@@ -2,5 +2,16 @@
 
 <p><%=  @comments.inspect %></p>
 
+<h3>Comments:</h3>
+
+<% if @comments.any? %>
+  <ul>
+    <% @comments.each do |comment| %>
+    <li><%= " #{comment.title} #{comment.comments_count}  " %></li>    
+    <% end %>
+  </ul>
+<% else %>
+  <p>No comments available.</p>
+<% end %>
 <hr>
 

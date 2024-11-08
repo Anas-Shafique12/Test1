@@ -21,7 +21,35 @@
     <%= form.text_area :body %>
   </div>
 
+  <h3>Comments</h3>
+  <div id="comments">
+    <%= form.fields_for :comments do |comment_form| %>
+      <div class="comment-fields">
+        <%= comment_form.label :content, "Comment", style: "display: block" %>
+        <%= comment_form.text_area :content %>
+      </div>
+    <% end %>
+  </div>
+  <br>
+  <button type="button" onclick="addCommentFields()">Add more comment</button>
+
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  let commentIndex = 0;
+  function addCommentFields() {
+    var commentsDiv = document.getElementById('comments');
+    var newCommentDiv = document.createElement('div');
+    newCommentDiv.className = 'comment-fields';
+    newCommentDiv.innerHTML = `
+      <div>
+        <label for="post_comments_attributes_${commentIndex}_content" style="display: block">Comment</label>
+        <textarea name="post[comments_attributes][${commentIndex}][content]" id="post_comments_attributes_${commentIndex}_content"></textarea>
+      </div>`;
+    commentsDiv.appendChild(newCommentDiv);
+    commentIndex++;
+  }
+</script>

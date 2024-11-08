@@ -3,6 +3,7 @@
 <% content_for :title, "Posts" %>
 
 <h1>Posts</h1>
+<%= link_to "New post", new_post_path %>
 
 <table>
   <thead>
@@ -17,11 +18,13 @@
       <tr>
         <td><%= render post %></td>
         <td><%= link_to post.status, toggle_status_post_path(post) %></td>
-        <td><%= link_to "Show this post", post %></td>
+        <td>
+          <% if can? :read, post %>
+            <%= link_to "Show this post", post %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
-    <%= paginate @posts %>
   </tbody>
 </table>
-
-<%= link_to "New post", new_post_path %>
+<%= paginate @posts %>
